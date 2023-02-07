@@ -1,0 +1,57 @@
+create table usuario(
+	id int primary key auto_increment not null,
+    nome varchar(50) not null,
+    imagem varchar(300),
+    email varchar(70) not null,
+    senha varchar(15) not null,
+    telefone varchar(13) not null
+);
+
+create table projeto(
+	id int primary key auto_increment not null,
+    manager_id int not null,
+    nome varchar(30) not null,
+    descricao varchar(100),
+    aparencia varchar(8),
+    foreign key (manager_id) references usuario(id)
+);
+
+create table assoc_projeto_user(
+	id int primary key auto_increment not null,
+    user_id int not null,
+    projeto_id int not null,
+    data_acesso timestamp not null,
+    foreign key (user_id) references usuario(id),
+    foreign key (projeto_id) references projeto(id)
+);
+
+create table cartao(
+	id int primary key auto_increment not null,
+    projeto_id int not null,
+    nome varchar(20) not null,
+    descricao varchar(100),
+    coluna int not null,
+    foreign key (projeto_id) references projeto(id)
+);
+
+create table atividade(
+	id int primary key auto_increment not null,
+    cartao_id int not null,
+    ativ_mae_id int,
+    nome varchar(20) not null,
+    tipo varchar(2) not null,
+    estado varchar(2) not null,
+    descricao varchar(100),
+    conteudo text,
+    data_pre_concl date,
+    data_real_concl date,
+    linha int not null,
+    foreign key (cartao_id) references cartao(id),
+    foreign key (ativ_mae_id) references atividade(id)
+);
+
+create table anotacao(
+	id int primary key auto_increment not null,
+    termo varchar(50) not null,
+    descricaro varchar(200) not null
+);
