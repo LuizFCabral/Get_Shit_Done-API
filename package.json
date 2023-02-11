@@ -20,6 +20,7 @@
 	},
 	"homepage": "https://github.com/LuizFCabral/Get_Shit_Done-API#readme",
 	"dependencies": {
+		"cors": "^2.8.5",
 		"dotenv": "^16.0.3",
 		"express": "^4.18.2",
 		"mysql2": "^3.1.1",
