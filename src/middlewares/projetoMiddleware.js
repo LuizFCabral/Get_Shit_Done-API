@@ -1,11 +1,21 @@
 const validarBody = (req, res, next) => {
 	const { body } = req;
 
-	if (body.manager_id === undefined || body.manager_id === "") {
-		return res.status(400).json({
-			message: 'The field "manager_id" is required and cannot be empty.',
-		});
+	if (req.method === "POST") {
+		if (body.manager_id === undefined || body.manager_id === "") {
+			return res.status(400).json({
+				message: 'The field "manager_id" is required and cannot be empty.',
+			});
+		}
 	}
+	if (req.method === "PUT") {
+		if (body.id === undefined || body.id === "") {
+			return res.status(400).json({
+				message: 'The field "id" is required and cannot be empty.',
+			});
+		}
+	}
+
 	if (body.nome === undefined || body.nome === "") {
 		return res
 			.status(400)

@@ -8,11 +8,15 @@ const getALL = async () => {
 
 const createProjeto = async (projeto) => {
 	const con = await db.conectar();
-	const proj = projeto;
 
 	const query =
 		"insert into projeto (manager_id, nome, descricao, aparencia) values(?, ?, ?, ?)";
-	const values = [proj.manager_id, proj.nome, proj.descricao, proj.aparencia];
+	const values = [
+		projeto.manager_id,
+		projeto.nome,
+		projeto.descricao,
+		projeto.aparencia,
+	];
 
 	const [createProjeto] = await con.execute(query, values);
 	return {
@@ -21,7 +25,37 @@ const createProjeto = async (projeto) => {
 	};
 };
 
+const deleteProject = async (id) => {
+	const con = await db.conectar();
+
+	const query = "delete from projeto where id = ?";
+
+	const [deleteProjeto] = await con.execute(query, [id]);
+	return { affectedRows: deleteProjeto.affectedRows };
+};
+
+const updateProject = async (projeto) => {
+	const con = await db.conectar();
+
+	const query =
+		"update projeto set nome = ?, descricao = ?, aparencia = ? where id = ?";
+	const values = [
+		projeto.nome,
+		projeto.descricao,
+		projeto.aparencia,
+		projeto.id,
+	];
+
+	const [updateProjeto] = await con.execute(query, values);
+	return {
+		affectedRows: updateProjeto.affectedRows,
+		changedRows: updateProjeto.changedRows,
+	};
+};
+
 module.exports = {
 	getALL,
 	createProjeto,
+	deleteProject,
+	updateProject,
 };
