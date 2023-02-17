@@ -35,6 +35,19 @@ const validarBody = (req, res, next) => {
 	next();
 };
 
+const validarParams = (req, res, next) => {
+	const { params } = req;
+
+	if (isNaN(params.id)) {
+		return res.status(403).json({
+			message: "The id must be a number.",
+		});
+	}
+
+	next();
+};
+
 module.exports = {
 	validarBody,
+	validarParams,
 };

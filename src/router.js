@@ -14,7 +14,11 @@ router.post(
 	projectMiddleWare.validarBody,
 	projetoController.createProjeto
 );
-router.delete("/project/:id", projetoController.deleteProjeto);
+router.delete(
+	"/project/:id",
+	projectMiddleWare.validarParams,
+	projetoController.deleteProjeto
+);
 router.put(
 	"/project",
 	projectMiddleWare.validarBody,
