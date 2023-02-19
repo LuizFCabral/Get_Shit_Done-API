@@ -6,6 +6,12 @@ const getALL = async (_req, res) => {
 	return res.status(200).json(projetos);
 };
 
+const searchPartName = async (req, res) => {
+	const { partname } = req.params;
+	const projetos = await projetoDAO.searchPartName(partname);
+	return res.status(200).json(projetos);
+};
+
 const createProjeto = async (req, res) => {
 	const projetos = await projetoDAO.createProjeto(req.body);
 
@@ -31,4 +37,5 @@ module.exports = {
 	createProjeto,
 	deleteProjeto,
 	updateProjeto,
+	searchPartName,
 };

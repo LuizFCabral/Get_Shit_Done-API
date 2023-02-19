@@ -53,9 +53,17 @@ const updateProject = async (projeto) => {
 	};
 };
 
+const searchPartName = async (parteNome) => {
+	const con = await db.conectar();
+	const query = `select * from projeto where lower(nome) like '%${parteNome}%'`;
+	const [projetos] = await con.execute(query);
+	return projetos;
+};
+
 module.exports = {
 	getALL,
 	createProjeto,
 	deleteProject,
 	updateProject,
+	searchPartName,
 };

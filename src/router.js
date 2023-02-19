@@ -8,7 +8,10 @@ const projectMiddleWare = require("./middlewares/projetoMiddleware");
 router.get("/", (_req, res) => res.status(200).send("Rodando!"));
 router.get("/user", userController.getALL);
 router.post("/user", userMiddleWare.validarBody, userController.createUser);
+
+//Rotas Projeto
 router.get("/project", projetoController.getALL);
+router.get("/project/:partname", projetoController.searchPartName);
 router.post(
 	"/project",
 	projectMiddleWare.validarBody,
